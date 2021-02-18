@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
     [Header("最大血量")]
     [Range(0, 200)]
     public float HPMax = 100;
+    [Header("地面判定位移")]
+    public Vector3 offset;
+    [Header("地面判定半徑")]
+    public float Radius;
+
 
     private Rigidbody2D rb;
     private AudioSource aud;
@@ -45,9 +50,20 @@ public class Player : MonoBehaviour
     {
         GetHorizontal();
         Move();
+        Jump();
     }
 
     #region 方法
+
+    /// <summary>
+    /// 判定地面球體
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1f, 0f, 0f, 0.6f);
+        //繪製球體(位置,半徑)
+        Gizmos.DrawSphere(transform.position + offset, Radius);
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -81,7 +97,33 @@ public class Player : MonoBehaviour
         }
         anim.SetBool("跑步開關", h != 0);
     }
+    /// <summary>
+    /// 跳躍
+    /// </summary>
+    private void Jump()
+    {
+        if (grond && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(new Vector2(0, jump));
+            grond = false;
+            anim.SetTrigger("跳躍觸發");
+        }
 
+        Collider2D hit = Physics2D.OverlapCircle(transform.position + offset, Radius, 1 << 8);
 
+        //如果 碰到的物件 存在的 就將是否為地面 設定為 是
+        if (hit)
+        {
+            grond = true;
+        }
+        //否則 沒碰到 就將是否為地面 設定為 否
+        else
+        {
+            grond = false;
+        }
+        anim.SetFloat("跳躍", rb.velocity.y);
+        anim.SetBool("是否在地面", grond);
+    }
+    
     #endregion
 }

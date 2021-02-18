@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 143876533}
   - component: {fileID: 143876535}
   - component: {fileID: 143876534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "\u5730\u677F"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -811,12 +811,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10.5
-  jump: 100
+  jump: 1000
   grond: 0
   rangeattack: 10
-  offsetAttack: {x: -1.12, y: -0.71, z: 0}
-  sizeAttack: {x: 2.26, y: 2.4, z: 0}
+  offsetAttack: {x: 0, y: 0, z: 0}
+  sizeAttack: {x: 0, y: 0, z: 0}
   attack: 50
   HP: 100
   HPMax: 100
+  offset: {x: 0, y: -2.11, z: 0}
+  Radius: 0.47
   h: 0
