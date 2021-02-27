@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: "Assets/\u5834\u666F/\u95DC\u5361\u4E00.unity"
+=======
+- path: "Assets/\u5834\u666F/\u4ECB\u9762.unity"
+>>>>>>> f4ed2e1d7035799e3be1f3d85355731bfb5024c2
   isLoaded: 1
   isActive: 1
   isSubScene: 0
