@@ -128,7 +128,6 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
-  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -163,7 +162,6 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -228,9 +226,10 @@ TextureImporter:
         - {x: -604, y: -355}
         - {x: 642, y: -355}
         - {x: 609, y: -195}
-        - {x: 459, y: -181}
-        - {x: 428, y: -24}
-        - {x: 342, y: 56}
+        - {x: 482, y: -165}
+        - {x: 416, y: -12}
+        - {x: 371, y: 34}
+        - {x: 140, y: 180}
       tessellationDetail: 0
       bones: []
       spriteID: 5b93266057e582460800000000000000
@@ -275,9 +274,9 @@ TextureImporter:
       physicsShape:
       - - {x: 0, y: 450}
         - {x: -133, y: 276}
-        - {x: -219, y: -13}
-        - {x: -322, y: -85}
-        - {x: -370, y: -362}
+        - {x: -179, y: 145}
+        - {x: -250, y: -125}
+        - {x: -311, y: -358}
         - {x: -527, y: -359}
         - {x: -527, y: -458}
         - {x: 527, y: -458}
@@ -285,7 +284,8 @@ TextureImporter:
         - {x: 420, y: -304}
         - {x: 313, y: 70}
         - {x: 235, y: 215}
-        - {x: 35, y: 456}
+        - {x: 142, y: 348}
+        - {x: 38, y: 458}
       tessellationDetail: 0
       bones: []
       spriteID: 422f1e5988287a410800000000000000
