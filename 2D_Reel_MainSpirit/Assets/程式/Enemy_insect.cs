@@ -10,6 +10,7 @@ public class Enemy_insect : MonoBehaviour
     [Header("速度"),Range(1,50)]
     public float speed = 2.5f;
 
+    private Animator anim;
     private float leftX, rightX;
     private bool faceLeft = true;
     private Rigidbody2D rb;
@@ -19,6 +20,7 @@ public class Enemy_insect : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         //斷絕父子關係
         transform.DetachChildren();
         //取得左右的X
@@ -71,5 +73,15 @@ public class Enemy_insect : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    public void Death()
+    {
+        anim.SetBool("死亡開關", true);
+        GetComponent<BoxCollider2D>().enabled = false;
+        rb.Sleep();
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
     #endregion
 }

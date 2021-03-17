@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7461435676142812883}
   - component: {fileID: 7461435676142812880}
   - component: {fileID: 7461435676142812882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "\u87F2"
-  m_TagString: Untagged
+  m_TagString: "\u602A\u7269"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7461435676142812880
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -554,8 +554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6841b90221adbda42992fc288f21d7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
-  numOfHearts: 10
+  health: 5
+  numOfHearts: 5
   hearts:
   - {fileID: 32378706}
   - {fileID: 1898321182}
@@ -12755,6 +12755,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u87F2"
       objectReference: {fileID: 0}
+    - target: {fileID: 7461435676142812884, guid: 7da3e7dc9510a45409fe648bf3de4b60,
+        type: 3}
+      propertyPath: m_TagString
+      value: "\u602A\u7269"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7da3e7dc9510a45409fe648bf3de4b60, type: 3}
 --- !u!1 &1155922988
@@ -12857,6 +12862,31 @@ PrefabInstance:
         type: 3}
       propertyPath: offset.y
       value: -0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413648748012990661, guid: b9631c101e7ad52478be22ef8c3ba22e,
+        type: 3}
+      propertyPath: rangeattack
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413648748012990661, guid: b9631c101e7ad52478be22ef8c3ba22e,
+        type: 3}
+      propertyPath: sizeAttack.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413648748012990661, guid: b9631c101e7ad52478be22ef8c3ba22e,
+        type: 3}
+      propertyPath: sizeAttack.y
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413648748012990661, guid: b9631c101e7ad52478be22ef8c3ba22e,
+        type: 3}
+      propertyPath: offsetAttack.x
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413648748012990661, guid: b9631c101e7ad52478be22ef8c3ba22e,
+        type: 3}
+      propertyPath: offsetAttack.y
+      value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 1413648748012990662, guid: b9631c101e7ad52478be22ef8c3ba22e,
         type: 3}
@@ -12962,6 +12992,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u4E3B\u89D2"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413648748012992315, guid: b9631c101e7ad52478be22ef8c3ba22e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9631c101e7ad52478be22ef8c3ba22e, type: 3}

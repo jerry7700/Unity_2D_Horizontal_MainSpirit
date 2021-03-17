@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class Player : MonoBehaviour
     [Range(0, 3000)]
     public int jump = 100;
     [Header("是否在地板上")]
-    [Tooltip("是否在地板上")]
     public bool grond = false;
     [Header("攻擊範圍")]
     [Range(0, 100)]
@@ -19,31 +19,27 @@ public class Player : MonoBehaviour
     public Vector3 offsetAttack;
     [Header("攻擊範圍大小")]
     public Vector3 sizeAttack;
-    [Header("攻擊力")]
-    [Range(0, 100)]
-    public float attack = 50;
-    [Header("血量")]
-    [Range(0, 200)]
-    public float HP = 100;
-    [Header("最大血量")]
-    [Range(0, 200)]
-    public float HPMax = 100;
     [Header("地面判定位移")]
     public Vector3 offset;
     [Header("地面判定半徑")]
     public float Radius;
 
-
+    private Health hp;
+    private Enemy_insect insect;
     private Rigidbody2D rb;
     private AudioSource aud;
     private Animator anim;
     public float h;
     #endregion
 
+    #region 事件
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        hp = FindObjectOfType<Health>();
+        insect = FindObjectOfType<Enemy_insect>();
     }
 
     private void Update()
@@ -51,6 +47,7 @@ public class Player : MonoBehaviour
         GetHorizontal();
         Move();
         Jump();
+        Damage();
     }
 
     #region 方法
@@ -63,13 +60,12 @@ public class Player : MonoBehaviour
         Gizmos.color = new Color(1f, 0f, 0f, 0.6f);
         //繪製球體(位置,半徑)
         Gizmos.DrawSphere(transform.position + offset, Radius);
+        //攻擊範圍
+        Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
+        Gizmos.DrawCube(transform.position + -transform.right * offsetAttack.x + transform.up * offsetAttack.y, sizeAttack);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(1f, 0f, 0f, 0.6f);
-        Gizmos.DrawCube(transform.position + transform.right * offsetAttack.x + transform.up * offsetAttack.y, sizeAttack);
-    }
+    #endregion
 
     /// <summary>
     /// 移動
@@ -97,6 +93,7 @@ public class Player : MonoBehaviour
         }
         anim.SetBool("跑步開關", h != 0);
     }
+
     /// <summary>
     /// 跳躍
     /// </summary>
@@ -124,6 +121,37 @@ public class Player : MonoBehaviour
         anim.SetFloat("跳躍", rb.velocity.y);
         anim.SetBool("是否在地面", grond);
     }
-    
+
+    /// <summary>
+    /// 碰撞
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //碰到蟲扣血
+        if (collision.gameObject.name == "蟲")
+        {
+            hp.health--;
+        }
+    }
+
+    private void Damage()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            anim.SetTrigger("攻擊觸發");
+            Collider2D hit = Physics2D.OverlapBox(transform.position + -transform.right * offsetAttack.x + transform.up * offsetAttack.y, sizeAttack, 0, 1 << 8);
+            if (hit) insect.Death();
+        }
+    }
+
+    private void Death()
+    {
+        if(hp.health <= 0)
+        {
+            anim.SetBool("死亡開關", true);
+            this.enabled = false;
+        }
+    }
     #endregion
 }
