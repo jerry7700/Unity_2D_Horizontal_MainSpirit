@@ -39,7 +39,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         hp = FindObjectOfType<Health>();
-        insect = FindObjectOfType<Enemy_insect>();
+        //只抓場景上的一個
+        //insect = FindObjectOfType<Enemy_insect>();
     }
 
     private void Update()
@@ -141,7 +142,7 @@ public class Player : MonoBehaviour
         {
             anim.SetTrigger("攻擊觸發");
             Collider2D hit = Physics2D.OverlapBox(transform.position + -transform.right * offsetAttack.x + transform.up * offsetAttack.y, sizeAttack, 0, 1 << 8);
-            if (hit) insect.Death();
+            if (hit) hit.GetComponent<Enemy_insect>().Death();
         }
     }
 
