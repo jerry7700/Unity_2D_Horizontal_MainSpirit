@@ -82,6 +82,7 @@ public class Enemy_insect : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         rb.Sleep();
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        Destroy(gameObject);
     }
     #endregion
 }

@@ -79,6 +79,9 @@ public class Player : MonoBehaviour
     }
     private void Move()
     {
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        if (info.IsName("主角_攻擊")) return;
+
         rb.velocity = new Vector2(h * Speed, rb.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -130,12 +133,15 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //碰到蟲扣血
-        if (collision.gameObject.name == "蟲")
+        if (collision.gameObject.name == "蟲" ||  collision.gameObject.name == "Boss")
         {
             hp.health--;
         }
     }
 
+    /// <summary>
+    /// 傷害
+    /// </summary>
     private void Damage()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
