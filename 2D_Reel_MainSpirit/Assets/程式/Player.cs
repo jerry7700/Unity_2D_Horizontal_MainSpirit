@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     public Vector3 offset;
     [Header("地面判定半徑")]
     public float Radius;
+    [Header("揮刀音效")]
+    public AudioClip audAtk;
+    [Header("受傷音效")]
+    public AudioClip audHurt;
+    [Header("跑步音效")]
+    public AudioClip walkAud;
 
     private Health hp;
     private Enemy_insect insect;
@@ -39,6 +45,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         hp = FindObjectOfType<Health>();
+        aud = GetComponent<AudioSource>();
         //只抓場景上的一個
         //insect = FindObjectOfType<Enemy_insect>();
     }
@@ -91,10 +98,11 @@ public class Player : MonoBehaviour
             transform.localEulerAngles = new Vector3(0, 180, 0);
         }
         //如果玩家按下A就執行
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             transform.localEulerAngles = Vector3.zero;
         }
+        
         anim.SetBool("跑步開關", h != 0);
     }
 
@@ -133,8 +141,9 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //碰到蟲扣血
-        if (collision.gameObject.name == "蟲" ||  collision.gameObject.name == "Boss")
+        if (collision.gameObject.name == "蟲" || collision.gameObject.name == "Boss")
         {
+            aud.PlayOneShot(audHurt);
             hp.health--;
         }
     }
@@ -147,6 +156,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("攻擊觸發");
+            aud.PlayOneShot(audAtk);
             Collider2D hit = Physics2D.OverlapBox(transform.position + -transform.right * offsetAttack.x + transform.up * offsetAttack.y, sizeAttack, 0, 1 << 8);
             if (hit) hit.GetComponent<Enemy_insect>().Death();
         }
@@ -154,7 +164,7 @@ public class Player : MonoBehaviour
 
     private void Death()
     {
-        if(hp.health <= 0)
+        if (hp.health <= 0)
         {
             anim.SetBool("死亡開關", true);
             this.enabled = false;

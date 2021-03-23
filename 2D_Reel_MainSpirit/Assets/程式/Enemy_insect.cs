@@ -9,11 +9,14 @@ public class Enemy_insect : MonoBehaviour
     public Transform rightPoint;
     [Header("速度"),Range(1,50)]
     public float speed = 2.5f;
+    [Header("死亡音效")]
+    public AudioClip augDeath;
 
     private Animator anim;
     private float leftX, rightX;
     private bool faceLeft = true;
     private Rigidbody2D rb;
+    private AudioSource aud;
     #endregion
 
     #region 事件
@@ -21,6 +24,7 @@ public class Enemy_insect : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        aud = GetComponent<AudioSource>();
         //斷絕父子關係
         transform.DetachChildren();
         //取得左右的X
@@ -78,6 +82,7 @@ public class Enemy_insect : MonoBehaviour
     /// </summary>
     public void Death()
     {
+        aud.PlayOneShot(augDeath);
         anim.SetBool("死亡開關", true);
         GetComponent<BoxCollider2D>().enabled = false;
         rb.Sleep();

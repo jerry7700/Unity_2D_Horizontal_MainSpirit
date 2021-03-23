@@ -13,16 +13,22 @@ public class Enemy_totem : MonoBehaviour
     [Header("子彈速度")]
     [Range(0, 5000)]
     public int BulletSpeed = 800;
+    [Header("發射音效")]
+    public AudioClip augFire;
+    [Header("受傷音效")]
+    public AudioClip augHurt;
 
     private Player player;
     private Rigidbody2D rb;
     private Animator anim;
+    private AudioSource aud;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        aud = GetComponent<AudioSource>();
         player = FindObjectOfType<Player>();
     }
 
@@ -41,10 +47,13 @@ public class Enemy_totem : MonoBehaviour
         tamp.GetComponent<Rigidbody2D>().AddForce(BulletGenrate.right * BulletSpeed + BulletGenrate.up * 150);
         ParticleSystem ps = tamp.GetComponent<ParticleSystem>();
         */
+
+        aud.PlayOneShot(augFire);
     }
 
     public void Death()
     {
+        aud.PlayOneShot(augHurt);
         anim.SetBool("死亡開關", true);
         GetComponent<BoxCollider2D>().enabled = false;
         rb.Sleep();
