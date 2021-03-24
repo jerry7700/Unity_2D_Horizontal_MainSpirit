@@ -170,7 +170,7 @@ MonoBehaviour:
   leftPoint: {fileID: 7461435677453237379}
   rightPoint: {fileID: 7461435676676434279}
   speed: 2.5
-  augDeath: {fileID: 8300000, guid: 011758a19c748c349987faadd6f6937f, type: 3}
+  augDeath: {fileID: 8300000, guid: 9f66a4f920bb1954faa04d99ad8de6da, type: 3}
 --- !u!82 &-7420751786205515134
 AudioSource:
   m_ObjectHideFlags: 0
