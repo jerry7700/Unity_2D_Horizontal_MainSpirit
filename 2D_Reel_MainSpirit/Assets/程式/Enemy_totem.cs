@@ -48,7 +48,7 @@ public class Enemy_totem : MonoBehaviour
         ParticleSystem ps = tamp.GetComponent<ParticleSystem>();
         */
 
-        aud.PlayOneShot(augFire);
+        aud.PlayOneShot(augFire, 0.75f);
     }
 
     public void Death()
