@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
         {
             transform.localEulerAngles = Vector3.zero;
         }
-        
+
         anim.SetBool("跑步開關", h != 0);
     }
 
@@ -156,9 +156,17 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("攻擊觸發");
-            aud.PlayOneShot(audAtk);
+            aud.PlayOneShot(audAtk, 0.5f);
             Collider2D hit = Physics2D.OverlapBox(transform.position + -transform.right * offsetAttack.x + transform.up * offsetAttack.y, sizeAttack, 0, 1 << 8);
-            if (hit) hit.GetComponent<Enemy_insect>().Death();
+            if (hit.name == "蟲")
+            {
+                hit.GetComponent<Enemy_insect>().Death();
+            }
+            else if (hit.name == "圖驣")
+            {
+                print(hit.name);
+                hit.GetComponent<Enemy_totem>().Death();
+            }
         }
     }
 
