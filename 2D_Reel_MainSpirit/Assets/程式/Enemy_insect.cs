@@ -7,10 +7,12 @@ public class Enemy_insect : MonoBehaviour
     public Transform leftPoint;
     [Header("右")]
     public Transform rightPoint;
-    [Header("速度"),Range(1,50)]
+    [Header("速度"), Range(1, 50)]
     public float speed = 2.5f;
     [Header("死亡音效")]
     public AudioClip augDeath;
+    [Header("死亡延遲"), Range(0, 100)]
+    public float deathDelay = 10;
 
     private Animator anim;
     private float leftX, rightX;
@@ -37,7 +39,7 @@ public class Enemy_insect : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
@@ -53,14 +55,14 @@ public class Enemy_insect : MonoBehaviour
     private void Move()
     {
         //如果(面向左)
-        if(faceLeft)
+        if (faceLeft)
         {
             //往左移動
             rb.velocity = new Vector2(-speed, rb.velocity.y);
-            if(transform.position.x < leftX)
+            if (transform.position.x < leftX)
             {
                 //轉向
-                transform.localScale = new Vector3(1,1,1);
+                transform.localScale = new Vector3(1, 1, 1);
                 faceLeft = false;
             }
         }
@@ -87,7 +89,7 @@ public class Enemy_insect : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         rb.Sleep();
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        Destroy(gameObject);
+        Destroy(gameObject, deathDelay);
     }
     #endregion
 }

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1757006007
-  m_SortingLayer: 3
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: -3935002959256323447, guid: d3be9bb3ca2a013428ff4a8d3cd2def1,
     type: 3}
@@ -171,6 +171,7 @@ MonoBehaviour:
   rightPoint: {fileID: 7461435676676434279}
   speed: 2.5
   augDeath: {fileID: 8300000, guid: 9f66a4f920bb1954faa04d99ad8de6da, type: 3}
+  deathDelay: 1
 --- !u!82 &-7420751786205515134
 AudioSource:
   m_ObjectHideFlags: 0

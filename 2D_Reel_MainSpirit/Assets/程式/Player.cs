@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
             anim.SetTrigger("跳躍觸發");
         }
 
-        Collider2D hit = Physics2D.OverlapCircle(transform.position + offset, Radius, 1 << 8);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position + offset, Radius, 1 << 11);
 
         //如果 碰到的物件 存在的 就將是否為地面 設定為 是
         if (hit)
@@ -158,14 +158,19 @@ public class Player : MonoBehaviour
             anim.SetTrigger("攻擊觸發");
             aud.PlayOneShot(audAtk, 0.5f);
             Collider2D hit = Physics2D.OverlapBox(transform.position + -transform.right * offsetAttack.x + transform.up * offsetAttack.y, sizeAttack, 0, 1 << 8);
-            if (hit.name == "蟲")
+            if (hit && hit.name == "蟲")
             {
                 hit.GetComponent<Enemy_insect>().Death();
             }
-            else if (hit.name == "圖驣")
+            else if (hit && hit.name == "圖驣")
             {
                 print(hit.name);
                 hit.GetComponent<Enemy_totem>().Death();
+            }
+            else if (hit && hit.name == "Boss")
+            {
+                print(hit.name);
+                hit.GetComponent<Enemy_Boss>().hp--;
             }
         }
     }

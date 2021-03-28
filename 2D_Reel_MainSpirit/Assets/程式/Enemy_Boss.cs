@@ -39,11 +39,15 @@ public class Enemy_Boss : MonoBehaviour
     {
         Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
         Gizmos.DrawSphere(transform.position, rangeattack);
+
+        Gizmos.color = new Color(0, 1f, 0f, 0.5f);
+        Gizmos.DrawRay(transform.position, -transform.right * 1.5f);
     }
 
     private void Update()
     {
         Move();
+        Death();
     }
     #endregion
 
@@ -56,26 +60,27 @@ public class Enemy_Boss : MonoBehaviour
         AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
         if (info.IsName("Boss_攻擊")) return;
 
-        float y = transform.position.x > player.transform.position.x ? 180 : 0;
+        float y = transform.position.x > player.transform.position.x ? 0 : 180;
         transform.eulerAngles = new Vector3(0, y, 0);
 
         float dis = Vector2.Distance(transform.position, player.transform.position);
 
-        if (dis > rangeattack)
+        if (!isattack && dis > rangeattack)
         {
-            rb.MovePosition(transform.position + transform.right * Time.deltaTime * Speed);
+            rb.MovePosition(transform.position + -transform.right * Time.deltaTime * Speed);
         }
-        else
+        else if (!isattack)
         {
-            Attack();
+            StartCoroutine(Attack());
         }
-        anim.SetBool("走路開關", rb.velocity.magnitude > 0);
+
+        if (!isattack) anim.SetBool("走路開關", rb.velocity.magnitude > 0);
     }
 
     /// <summary>
     /// 攻擊
     /// </summary>
-    public void Attack()
+   /*public void Attack()
     {
         rb.velocity = Vector3.zero;
         if (timer < attackCD)
@@ -89,14 +94,43 @@ public class Enemy_Boss : MonoBehaviour
             StartCoroutine(DelaySendDamage());
             anim.SetBool("攻擊開關", false);
         }
-    }
+    }*/
 
-    public IEnumerator DelaySendDamage()
+    bool isattack;
+    public float waitattack = 1f;
+    public float BossSpeed = 0.5f;
+    public float waitBossSpeed = 2f;
+
+    public IEnumerator Attack()
     {
-        yield return new WaitForSeconds(attackDelay);
-        Collider2D hit = Physics2D.OverlapBox(transform.position + transform.right * offsetAttack.x + transform.up * offsetAttack.y, sizeAttack, 0, 1 << 9);
-        if (hit) Speed = 10f;
-        rb.MovePosition(transform.position + transform.right * Time.deltaTime * Speed);
+        isattack = true;
+        anim.SetBool("攻擊開關", true);
+        yield return new WaitForSeconds(waitattack);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.right, 1.5f, 1 << 11);
+        while(!hit)
+        {
+            hit = Physics2D.Raycast(transform.position, -transform.right, 1.5f, 1 << 11);
+            rb.MovePosition(transform.position + -transform.right * BossSpeed);
+            yield return new WaitForSeconds(waitBossSpeed);
+        }
+
+        print(hit.collider.name);
+        isattack = false;
+        anim.SetBool("攻擊開關", false);
+
+    }
+    public int hp = 2;
+
+    private void Death()
+    {
+        if (hp <= 0)
+        {
+            anim.SetBool("死亡開關", true);
+            rb.Sleep();
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            this.enabled = false;
+        }
     }
     #endregion
 }

@@ -17,7 +17,7 @@ TagManager:
   - "\u602A\u7269"
   - "\u73A9\u5BB6"
   - "\u795E\u6728\u7F50_\u5916\u8868"
-  - 
+  - "\u5730\u677F"
   - 
   - 
   - 
@@ -39,8 +39,8 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: "\u5929\u7A7A"
+    uniqueID: 2190301187
     locked: 0
   - name: "\u80CC\u666F"
     uniqueID: 3934375391
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: "\u4E3B\u89D2\u5C64"
     uniqueID: 2537961289
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: "\u524D\u666F"
     uniqueID: 2403218015

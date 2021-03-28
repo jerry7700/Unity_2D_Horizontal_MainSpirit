@@ -14,6 +14,8 @@ public class Enemy_totem : MonoBehaviour
     public float atkRang = 10;
     [Header("攻擊CD"), Range(0, 100)]
     public float atkCD = 10;
+    [Header("死亡延遲"), Range(0, 100)]
+    public float deathDelay = 10;
 
 
     [Header("發射音效")]
@@ -22,7 +24,6 @@ public class Enemy_totem : MonoBehaviour
     public AudioClip augHurt;
 
     private Player player;
-    private Rigidbody2D rb;
     private Animator anim;
     private AudioSource aud;
     private float Timer;
@@ -30,7 +31,6 @@ public class Enemy_totem : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         aud = GetComponent<AudioSource>();
         player = FindObjectOfType<Player>();
@@ -44,7 +44,7 @@ public class Enemy_totem : MonoBehaviour
 
     private void Update()
     {
-        //Damage();
+        Damage();
     }
 
     private void Damage()
@@ -80,8 +80,7 @@ public class Enemy_totem : MonoBehaviour
         aud.PlayOneShot(augHurt);
         anim.SetBool("死亡觸發", true);
         GetComponent<BoxCollider2D>().enabled = false;
-        rb.Sleep();
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        Destroy(gameObject);
+        Destroy(gameObject, deathDelay);
+        enabled = false;
     }
 }
