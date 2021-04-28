@@ -91,16 +91,21 @@ public class Player : MonoBehaviour
 
         rb.velocity = new Vector2(h * Speed, rb.velocity.y);
 
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) || h > 0)
         {
             //transform指的此腳本同一層的 transform元件
             // Rotation 角度在程式是 localEulerAngless
             transform.localEulerAngles = new Vector3(0, 180, 0);
         }
-        //如果玩家按下A就執行
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || h < 0)
         {
             transform.localEulerAngles = Vector3.zero;
+        }
+
+        if (h != 0 && Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow))
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            h = 0;
         }
 
         anim.SetBool("跑步開關", h != 0);
